@@ -49,33 +49,27 @@ ajouter dans le fichier index.css :
 ```
 
 Ajouter le router 
-    
-    
+
     npm install react-router-dom
-    
+
 
 Ajouter fontAwesome 
 
-    ```
     npm install --save @fortawesome/fontawesome-svg-core
     npm install --save @fortawesome/free-solid-svg-icons
     npm install --save @fortawesome/react-fontawesome
-    ```
+
 
 Ajouter la pagination
     
-    ```bash
     npm install rc-pagination
-    ```
+
 
 Ajouter lodash pour la session storage
 
-    ```bash
         npm i --save lodash
-    ```
+
 
 Ajouter axios 
   
-      ```bash
           npm install axios
-      ```
