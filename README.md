@@ -50,9 +50,9 @@ ajouter dans le fichier index.css :
 
 Ajouter le router 
     
-    ```yaml
+    
     npm install react-router-dom
-    ```
+    
 
 Ajouter fontAwesome 
 
