@@ -73,3 +73,9 @@ Ajouter lodash pour la session storage
     ```bash
         npm i --save lodash
     ```
+
+Ajouter axios 
+  
+      ```bash
+          npm install axios
+      ```
