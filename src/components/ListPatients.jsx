@@ -46,7 +46,7 @@ export const ListPatients = () => {
                                 <td className="border border-gray-300 py-2" >{patient.nom}</td>
                                 <td className="border border-gray-300 py-2" >{patient.mail}</td>
                                 <td className="border border-gray-300 py-2" >
-                                    <Link className='rounded-lg px-3 py-2 m-2 bg-blue-500 text-white'><FontAwesomeIcon icon={faEye} /></Link>
+                                    <Link to="/admin/patients/voir" className='rounded-lg px-3 py-2 m-2 bg-blue-500 text-white'><FontAwesomeIcon icon={faEye} /></Link>
                                     <Link className='rounded-lg px-3 py-2 m-2 bg-green-700 text-white'><FontAwesomeIcon icon={faPenToSquare} /></Link>
                                 </td>
                             </tr>

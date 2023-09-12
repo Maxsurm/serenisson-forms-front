@@ -9,26 +9,26 @@ export const FormPatients = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [message, setMessage] = useState('void')
     const API_URL = "http://localhost:8080/admin/patients"
+    const [nom, setNom] = useState('')
+    const [prenom, setPrenom] = useState('')
 
-    const sendPatientInfo = async (data) => {
-        try {
-            console.log(data);
-            axios.post(API_URL, data, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+    const sendPatientInfo = data => {
+        console.log(data);
+        axios.post(API_URL, data)
+            .then((response) => {
+                console.log(response.status)
+                setMessage('success')
             })
-
-        } catch (err) {
-            console.log(err)
-        }
+            .catch((error) => {
+                console.log(error)
+                setMessage('error')
+            })
     }
-
 
     return (
         <>
             {message == 'success' &&
-                <p className='bg-emerald-200 p-4 text-black text-center font-bold text-3xl mb-10 rounded-xl border-2 border-green-500'>Le patient {nom} {prenom} est bien enregistré </p>
+                <p className='bg-emerald-200 p-4 text-black text-center font-bold text-3xl mb-10 rounded-xl border-2 border-green-500'>Le patient est bien enregistré </p>
             }
 
             {message == 'void' &&
@@ -62,10 +62,10 @@ export const FormPatients = () => {
                         {errors.prenom?.type === 'required' && <p className='text-red-500'>Le prénom est obligatoire</p>}
                     </div>
                     <div className='my-4'>
-                        <label className="font-bold text-green-900 text-xl" htmlFor="email">Email</label>
+                        <label className="font-bold text-green-900 text-xl" htmlFor="mail">Email</label>
                         <input
-                            {...register("email", { required: true })}
-                            id="email" name="email"
+                            {...register("mail", { required: true })}
+                            id="mail" name="mail"
                             className='p-5 mt-3 w-full rounded-xl border border-slate-200'
                             type='email'
                             placeholder="Tapez l'Email du patient ici " />
