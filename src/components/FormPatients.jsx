@@ -1,20 +1,26 @@
-import React, { useState } from "react"
+import axios from "axios";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 
 
 export const FormPatients = () => {
 
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [message, setMessage] = useState('void')
-    const [nom, setNom] = useState('')
-    const [prenom, setPrenom] = useState('')
-    const [email, setEmail] = useState('')
+    const API_URL = "http://localhost:8080/admin/patients"
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        if (nom !== '' && prenom !== '' && email !== '') {
-            setMessage('success')
-        } else {
-            setMessage('error')
+    const sendPatientInfo = async (data) => {
+        try {
+            console.log(data);
+            axios.post(API_URL, data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+        } catch (err) {
+            console.log(err)
         }
     }
 
@@ -34,35 +40,36 @@ export const FormPatients = () => {
             }
 
             <div className='flex justify-center'>
-                <p className='text-lg'>{nom}</p>
-                <form onSubmit={handleSubmit} className='bg-green-50 rounded-xl border border-slate-200 w-2/3 p-6'>
+                <form onSubmit={handleSubmit(sendPatientInfo)} className='bg-green-50 rounded-xl border border-slate-200 w-2/3 p-6'>
                     <div className='my-4'>
                         <label className="font-bold text-green-900 text-xl" htmlFor="name">Nom</label>
                         <input
-                            onChange={(e) => setPrenom(e.target.value)}
-                            value={prenom}
+                            {...register("nom", { required: true })}
+                            id="nom" name="nom"
                             className='p-5 mt-3 w-full rounded-xl border border-slate-200'
                             type='text'
                             placeholder='Tapez le nom du patient ici' />
+                        {errors.nom?.type === 'required' && <p className='text-red-500'>Le nom est obligatoire</p>}
                     </div>
                     <div className='my-4'>
                         <label className="font-bold text-green-900 text-xl" htmlFor="firstname">Prénom</label>
                         <input
-                            onChange={(e) => setNom(e.target.value)}
-                            value={nom}
+                            {...register("prenom", { required: true })}
+                            id="prenom" name="prenom"
                             className='p-5 mt-3 w-full rounded-xl border border-slate-200'
                             type='text'
                             placeholder='Tapez le prénom du patient ici' />
+                        {errors.prenom?.type === 'required' && <p className='text-red-500'>Le prénom est obligatoire</p>}
                     </div>
-
                     <div className='my-4'>
                         <label className="font-bold text-green-900 text-xl" htmlFor="email">Email</label>
                         <input
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
+                            {...register("email", { required: true })}
+                            id="email" name="email"
                             className='p-5 mt-3 w-full rounded-xl border border-slate-200'
                             type='email'
-                            placeholder="Tapez l'Email du patient ici "/>
+                            placeholder="Tapez l'Email du patient ici " />
+                        {errors.email?.type === 'required' && <p className='text-red-500'>L'email est obligatoire</p>}
                     </div>
                     <div className='flex justify-center'>
 
