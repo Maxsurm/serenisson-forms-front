@@ -24,7 +24,7 @@ const App = () => {
           <div className="w-full">
             <div className="mx-auto ">
               <a className="mx-auto flex justify-center my-5" href="/admin">
-                <img className="" width="25%" src="../../public/img/Logo.png" alt="Lien vers l'accueil - Logo Serenisson" />
+                <img className="" width="25%" src="/img/Logo.png" alt="Lien vers l'accueil - Logo Serenisson" />
               </a>
             </div>
             {/*====================================================== //

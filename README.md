@@ -67,9 +67,13 @@ Ajouter la pagination
 
 Ajouter lodash pour la session storage
 
-        npm i --save lodash
+    npm i --save lodash
 
 
 Ajouter axios 
   
-          npm install axios
+    npm install axios
+
+Gestion des formulaires
+
+    npm install react-hook-form
