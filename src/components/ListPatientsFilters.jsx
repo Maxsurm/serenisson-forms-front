@@ -1,3 +1,4 @@
+
 import { PatientLine } from './PatientLine';
 
 
@@ -5,7 +6,6 @@ export const ListPatientsFilters = ({ patients, error }) => {
     if (error) {
         return <p className="text-red-700 text-xl my-3 font-bold">Erreur : {error}</p>;
     }
-
     return (
         <>
             <table className='w-full  mt-5 '>

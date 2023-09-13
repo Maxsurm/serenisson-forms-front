@@ -12,7 +12,7 @@ export const Sidebar = () => {
                 <span>Patients</span>
             </Link>
 
-            <Link to="#" className="flex items-center space-x-1 rounded-md px-2 py-3 text-white hover:bg-gray-100 hover:text-slate-900 font-bold text-lg">
+            <Link to="/admin/questions" className="flex items-center space-x-1 rounded-md px-2 py-3 text-white hover:bg-gray-100 hover:text-slate-900 font-bold text-lg">
                 <span className="text-2xl"></span>
                 <span>Questions</span>
             </Link>

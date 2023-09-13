@@ -10,6 +10,8 @@ import { FrontClient } from "./views/FrontClient";
 import { NotFound } from "./views/NotFound";
 import { AdminPatientsAdd } from "./views/AdminPatientsAdd";
 import { AdminPatientsShow } from "./views/AdminPatientsShow";
+import { AdminQuestions } from "./views/AdminQuestions";
+import { AdminQuestionsEdit } from "./views/AdminQuestionsEdit";
 
 const App = () => {
   const location = window.location;
@@ -35,6 +37,8 @@ const App = () => {
                 <Route path="/admin/patients" element={<AdminPatients />} />
                 <Route path="/admin/patients/editer/:id" element={<AdminPatientsAdd />} />
                 <Route path="/admin/patients/voir/:id" element={<AdminPatientsShow />} />
+                <Route path="/admin/questions" element={<AdminQuestions />} />
+                <Route path="/admin/questions/editer/:id" element={<AdminQuestionsEdit />} />
 
                 <Route path="/admin/*" element={<NotFound />} />
               </Routes>
