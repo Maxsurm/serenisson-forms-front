@@ -20,7 +20,7 @@ const App = () => {
     <BrowserRouter>
       {/* SI ON EST DANS L'ADMIN */}
       {location.pathname.includes("/admin") &&
-        <div id="admin-template" className="flex">
+        <div  className="flex min-h-screen">
           <Sidebar />
           <div className="w-full">
             <div className="mx-auto ">

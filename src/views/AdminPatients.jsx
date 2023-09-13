@@ -32,13 +32,11 @@ export const AdminPatients = () => {
     // Debouncing : eviter trop d'appel API
     const debouncingFetchPatients = debounce(fetchPatients, 500)
     useEffect(() => {
-        if (search) {
             debouncingFetchPatients();
             // cleanup 
             return () => {
                 debouncingFetchPatients.cancel()
             }
-        }
     }, [search])
 
     useEffect(() => {

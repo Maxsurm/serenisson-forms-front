@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const Sidebar = () => {
     return (
-        <div id="sidebar" className='h-full'>
+        <div id="sidebar" className='grow-1'>
         <aside className="flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-slate-900 px-2 h-full pt-5" 
             x-show="asideOpen">
             <img className='mx-auto py-5' id="minilogo" src="/img/logo-mini.png" alt="" />

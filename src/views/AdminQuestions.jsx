@@ -15,11 +15,11 @@ export const AdminQuestions = () => {
     const [questionsPerPage, setQuestionsPerPage] = useState(10)
     const [totalQuestions, setTotalQuestions] = useState(0)
 
-    const API_URL = `http://localhost:8080/admin/questions/${currentPage}/${questionsPerPage}${search?'/'+search:''}`
+    const API_URL = `http://localhost:8080/admin/questions/${currentPage}/${questionsPerPage}${search ? '/' + search : ''}`
 
     const fetchQuestions = async () => {
         try {
-            const { data} = await axios.get(API_URL);
+            const { data } = await axios.get(API_URL);
             setQuestions(data);
             setTotalQuestions(data.totalElements)
         } catch (error) {
@@ -31,12 +31,9 @@ export const AdminQuestions = () => {
     // Debouncing : eviter trop d'appel API
     const debouncingFetchQuestions = debounce(fetchQuestions, 500)
     useEffect(() => {
-        if (search) {
             debouncingFetchQuestions();
-            // cleanup 
             return () => {
                 debouncingFetchQuestions.cancel()
-            }
         }
     }, [search])
 
@@ -54,6 +51,7 @@ export const AdminQuestions = () => {
     const handlePageChange = (pageNum) => {
         setCurrentPage(pageNum)
     }
+
     return (
         <main className='my-10 container mx-auto'>
             <h2 className='text-3xl font-bold mb-5'>Gestion des questions</h2>
@@ -88,10 +86,7 @@ export const AdminQuestions = () => {
             </div>
 
             {/* Listes des questions */}
-                    <ListQuestions
-                        questions={questions}
-                        error={error}
-                    />
+            {questions != "" ? <ListQuestions questions={questions} error={error}fetchQuestions={fetchQuestions}/> : <p className="text-center">Aucune question trouvée</p>}
 
             {/* pagination */}
             <div className='my-10 flex justify-center '>

@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 
 export const FrontClient = () => {
     return (
-        <Link to="/admin"  >ADMIN</Link>
+        <div className="">
+            
+
+        </div>
     )
 }

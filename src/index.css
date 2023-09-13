@@ -7,10 +7,6 @@ body {
     height: 100vh;
 }
 
-#admin-template {
-    height: 100vh;
-}
-
 .rc-pagination {
     display: flex;
     align-items: center;

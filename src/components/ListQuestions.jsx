@@ -1,11 +1,10 @@
 import { QuestionLine } from './QuestionLine';
 
 
-export const ListQuestions = ({ questions, error }) => {
+export const ListQuestions = ({ questions, error, fetchQuestions }) => {
     if (error) {
         return <p className="text-red-700 text-xl my-3 font-bold">Erreur : {error}</p>;
     }
-    console.log(questions)
     return (
         <>
             <table className='w-full  mt-5 '>
@@ -21,7 +20,7 @@ export const ListQuestions = ({ questions, error }) => {
                 <tbody>
                     {
                         questions.map((question) => (
-                            <QuestionLine key={question.id} question={question} />
+                            <QuestionLine key={question.id} question={question} fetchQuestions={fetchQuestions} />
                         ))
                     }
                 </tbody>

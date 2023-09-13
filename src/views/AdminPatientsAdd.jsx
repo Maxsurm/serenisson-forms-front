@@ -31,7 +31,7 @@ export const AdminPatientsAdd = () => {
         register,
         handleSubmit,
         formState: { errors },
-
+        reset,
         setValue,
     } = useForm({ defaultValue: patient });
     const [message, setMessage] = useState("void");
@@ -42,6 +42,7 @@ export const AdminPatientsAdd = () => {
             .post(API_URL, data)
             .then((response) => {
                 setMessage("success");
+                if(param.id =="0"){reset()}
             })
             .catch((error) => {
                 console.log(error);
@@ -60,7 +61,7 @@ export const AdminPatientsAdd = () => {
 
             {message == "void" && (
                 <p className="bg-white p-4 text-black text-center font-bold text-3xl mb-10 rounded-xl">
-                    Veuillez enregistrer le nouveau patient
+                    { param.id == "0" ? "Veuillez enregistrer le nouveau patient" : "Veuillez modifier le patient"}
                 </p>
             )}
 

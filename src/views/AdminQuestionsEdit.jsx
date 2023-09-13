@@ -32,7 +32,7 @@ export const AdminQuestionsEdit = () => {
         register,
         handleSubmit,
         formState: { errors },
-
+        reset,
         setValue,
     } = useForm({ defaultValue: question });
     const [message, setMessage] = useState("void");
@@ -43,6 +43,8 @@ export const AdminQuestionsEdit = () => {
             .post(API_URL, data)
             .then((response) => {
                 setMessage("success");
+                //Reset du formulaire
+                if(param.id =="0"){reset()}
             })
             .catch((error) => {
                 console.log(error);
@@ -61,7 +63,7 @@ export const AdminQuestionsEdit = () => {
 
             {message == "void" && (
                 <p className="bg-white p-4 text-black text-center font-bold text-3xl mb-10 rounded-xl">
-                    Veuillez enregistrer la nouvelle question
+                    { param.id == "0" ? "Veuillez enregistrer la nouvelle question" : "Veuillez modifier la question"}
                 </p>
             )}
 
@@ -86,6 +88,7 @@ export const AdminQuestionsEdit = () => {
                             name="rankOrder"
                             className="p-5 mt-3 w-full rounded-xl border border-slate-200"
                             type="number"
+                            min="0"
                             placeholder="Tapez le rang de la question"
                         />
                         {errors.rankOrder?.type === "required" && (
