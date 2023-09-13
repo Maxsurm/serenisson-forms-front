@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 export const AdminPatientsShow = () => {
 
@@ -7,9 +8,9 @@ export const AdminPatientsShow = () => {
   const [error, setError] = useState(null)
 
 
-  // const param = useParams()
+  const param = useParams()
 
-  const API_URL = "http://localhost:8080/admin/patients/1"
+  const API_URL = `http://localhost:8080/admin/patients/${param.id}`
 
   const fetchPatient = async () => {
 
@@ -54,7 +55,7 @@ export const AdminPatientsShow = () => {
                   Email: {patient.mail}
                 </div>
                 <h3 className="text-2xl font-bold my-5">Formulaires du patient</h3>
-                {/* LES FORMULAIRE  */}
+                {/* LES FORMULAIRES  */}
               </div>
             </div>
           </div>

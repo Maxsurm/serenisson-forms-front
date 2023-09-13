@@ -2,14 +2,14 @@ import { faEye, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 
 export const ListPatients = () => {
 
     const [patients, setPatients] = useState([])
 
-    const API_URL = "http://localhost:8080/admin/patients/1/10"
+    const API_URL = "http://localhost:8080/admin/patients/1/id"
 
     const fetchPatients = () => {
         axios.get(API_URL)
@@ -21,9 +21,7 @@ export const ListPatients = () => {
         fetchPatients()
     }, [])
 
-
-
-
+    const navigate = useNavigate()
 
     return (
         <>
@@ -46,7 +44,10 @@ export const ListPatients = () => {
                                 <td className="border border-gray-300 py-2" >{patient.nom}</td>
                                 <td className="border border-gray-300 py-2" >{patient.mail}</td>
                                 <td className="border border-gray-300 py-2" >
-                                    <Link to="/admin/patients/voir" className='rounded-lg px-3 py-2 m-2 bg-blue-500 text-white'><FontAwesomeIcon icon={faEye} /></Link>
+                                    <button onClick={navigate(`/admin/patients/voir/${patient.id}`)} 
+                                    className='rounded-lg px-3 py-2 m-2 bg-blue-500 text-white'>
+                                        <FontAwesomeIcon icon={faEye} />
+                                    </button>
                                     <Link className='rounded-lg px-3 py-2 m-2 bg-green-700 text-white'><FontAwesomeIcon icon={faPenToSquare} /></Link>
                                 </td>
                             </tr>

@@ -77,3 +77,11 @@ Ajouter axios
 Gestion des formulaires
 
     npm install react-hook-form
+
+Pagination
+
+    npm install rc-pagination
+
+Debouncing 
+
+    npm i --save lodash

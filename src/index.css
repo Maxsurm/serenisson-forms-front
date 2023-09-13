@@ -7,6 +7,28 @@ body {
     height: 100vh;
 }
 
-#admin-template{
+#admin-template {
     height: 100vh;
-  }
+}
+
+.rc-pagination {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rc-pagination-item {
+    background-color: transparent !important;
+    padding: 5px 8px;
+    border: none !important;
+    font-weight: bold;
+    box-shadow: black
+}
+
+.rc-pagination-item.rc-pagination-item-active {
+    background-color: #125f1f !important;
+}
+
+.rc-pagination-item.rc-pagination-item-active a {
+    color: white !important;
+}
