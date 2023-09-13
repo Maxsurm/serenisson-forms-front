@@ -3,3 +3,25 @@
   width: 50%;
   
 }
+#big-logo{
+  margin:auto
+  
+}
+@media screen and (max-width: 600px) {
+  #big-logo{
+    width: 60%;
+    margin:auto
+  }
+}
+@media screen and (min-width: 600px) {
+  #big-logo{
+    width: 40%;
+    
+  }
+}
+@media screen and (min-width: 1000px) {
+  #big-logo{
+    width: 30%;
+    
+  }
+}
