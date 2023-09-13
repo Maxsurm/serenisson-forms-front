@@ -58,7 +58,7 @@ export const AdminPatients = () => {
     return (
         <main className='my-10 container mx-auto'>
             <h2 className='text-3xl font-bold mb-5'>Gestion des patients</h2>
-            <Link to="/admin/patients/editer/0" className="bg-green-700 p-2 rounded-md text-white font-bold my-4" >Ajouter un patient</Link>
+            <Link to="/admin/patients/editer/0" className="bg-green-700 p-2 rounded-md text-white font-bold my-4 cus-btn" >Ajouter un patient</Link>
             {/* FORM */}
             <div className="my-4 flex gap-6">
                 <input
@@ -67,7 +67,7 @@ export const AdminPatients = () => {
                         setSearch(e.target.value)
                         setCurrentPage(1)
                     }}
-                    className=" py-2 px-6 leading-none bg-gray-900 text-slate-100  focus:outline-none focus:border-green-700  border-b-2 border-green-50"
+                    className=" py-2 mt-2 px-6 leading-none bg-gray-300 text-slate-700  focus:outline-none focus:border-green-700  border-b-2 border-green-50"
                     type='text'
                     placeholder="Que recherchez-vous ?" />
 
@@ -78,7 +78,7 @@ export const AdminPatients = () => {
                         setPatientsPerPage(e.target.value)
                         setCurrentPage(1)
                     }}
-                    className="py-2 px-6 bg-gray-900 text-slate-100"
+                    className="py-2 px-6 bg-gray-300 text-slate-700"
                     name="patientsPerPage"
                     id="patientsPerPage">
                     <option value="15">15</option>

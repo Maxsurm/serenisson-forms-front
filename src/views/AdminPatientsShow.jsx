@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { BackBtn } from '../components/BackBtn'
 
 export const AdminPatientsShow = () => {
 
@@ -38,6 +39,7 @@ export const AdminPatientsShow = () => {
     <>
       {patient &&
         <main>
+          <BackBtn />
           <div className="flex justify-center">
             <div className="w-2/3">
               <h2 className="text-3xl font-bold mb-5">Détails du patient</h2>

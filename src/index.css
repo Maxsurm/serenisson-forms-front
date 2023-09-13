@@ -26,9 +26,18 @@ body {
 }
 
 .rc-pagination-item.rc-pagination-item-active {
-    background-color: #125f1f !important;
+    background-color: #1e7e2e !important;
+    border-radius: 10px;
 }
 
 .rc-pagination-item.rc-pagination-item-active a {
     color: white !important;
+}
+
+.rc-pagination {
+    cursor:pointer;
+}
+
+button, .cus-btn{
+    box-shadow: 1px 2px 3px 1px #424242;
 }
