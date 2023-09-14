@@ -20,7 +20,6 @@ export const AdminPatients = () => {
     const fetchPatients = async () => {
         try {
             const { data} = await axios.get(API_URL);
-            console.log(data);
             setPatients(data.content);
             setTotalPatients(data.totalElements)
         } catch (error) {
@@ -33,7 +32,6 @@ export const AdminPatients = () => {
     const debouncingFetchPatients = debounce(fetchPatients, 500)
     useEffect(() => {
             debouncingFetchPatients();
-            // cleanup 
             return () => {
                 debouncingFetchPatients.cancel()
             }

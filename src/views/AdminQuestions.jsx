@@ -20,7 +20,7 @@ export const AdminQuestions = () => {
     const fetchQuestions = async () => {
         try {
             const { data } = await axios.get(API_URL);
-            setQuestions(data);
+            setQuestions(data.content);
             setTotalQuestions(data.totalElements)
         } catch (error) {
             setError(error.message);

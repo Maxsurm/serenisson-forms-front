@@ -1,8 +1,39 @@
-import React from 'react'
-
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 
 export const FrontClient = () => {
+
+
+    // "BOOL= Oui, Non"
+// "R1= Très satisfaisant , satisfaisant, peu satisfaisant, pas satisfait "
+// "R2= jamais, occasionnelles, assez fréquentes, toujours"
+
+    const [questions,setQuestions] = useState([])
+
+// recuperation des questions
+    const API_URL = `http://localhost:8080/admin/questions`
+    
+    const fetchQuestions = async () => {
+        try {
+            const { data } = await axios.get(API_URL);
+            setQuestions(data);
+            console.log(data)
+        } catch (error) {
+            setError(error.message);
+        }
+        
+    };
+    
+    useEffect(() => {
+        fetchQuestions();
+    }, []);
+    
+
+// traitement des questions lié uniquement a un formulaire
+
+// recuperation des reponses
+
     return (
         <>
             <header>
