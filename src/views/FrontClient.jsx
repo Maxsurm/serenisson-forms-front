@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 
 export const FrontClient = () => {
@@ -11,14 +12,17 @@ export const FrontClient = () => {
 
     const [questions,setQuestions] = useState([])
 
+    const param = useParams()
+
 // recuperation des questions
-    const API_URL = `http://localhost:8080/admin/questions`
-    
+    const API_URL = `http://localhost:8080/admin/questions/form/${param.formulaire}`
+    ///question/{formulaire}/{rang}
+    console.log(param)
     const fetchQuestions = async () => {
         try {
             const { data } = await axios.get(API_URL);
-            setQuestions(data);
-            console.log(data)
+            console.log("data.content" , data.content)
+            setQuestions(data.content);
         } catch (error) {
             setError(error.message);
         }

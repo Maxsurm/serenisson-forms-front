@@ -22,6 +22,7 @@ export const AdminQuestions = () => {
             const { data } = await axios.get(API_URL);
             setQuestions(data.content);
             setTotalQuestions(data.totalElements)
+            console.log(questions)
         } catch (error) {
             setError(error.message);
         }

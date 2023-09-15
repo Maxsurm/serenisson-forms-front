@@ -47,7 +47,7 @@ const App = () => {
         </div>
       }
       <Routes>
-        <Route path="/" element={<FrontClient />} />
+        <Route path="/:formulaire" element={<FrontClient />} />
         {!location.pathname.includes("/admin") &&
           <Route path="*" element={<NotFound />} />
         }
