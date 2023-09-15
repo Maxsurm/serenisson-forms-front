@@ -116,7 +116,7 @@ export const AdminQuestionsEdit = () => {
                     </div>
                     <div className="my-4">
                         <label className="font-bold text-green-900 text-xl" htmlFor="type">
-                            Type
+                            Type de réponse
                         </label>
                         <select
                             {...register("type", { required: true })}
@@ -128,6 +128,7 @@ export const AdminQuestionsEdit = () => {
                             <option value="TEXTAREA">Texte(long)</option>
                             <option value="R1">QCM Satisfaction</option>
                             <option value="R2">QCM Temporel</option>
+                            <option value="NUMBER">Nombres</option>
                             </select>
                             {errors.type?.type === "required" && (
                             <p className="text-red-500">Le type est obligatoire</p>

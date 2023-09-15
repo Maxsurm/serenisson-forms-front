@@ -31,6 +31,9 @@ export const QuestionLine = ({ question , fetchQuestions}) => {
             case ("R2"):
                 setType("QCM Temporel")
                 break;
+            case ("NUMBER"):
+                setType("Nombres")
+                break;
             default:
                 break;
         }
