@@ -66,7 +66,7 @@ export const FrontClient = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(responses)
-        axios.post('http://localhost:8080/anamnese', responses)
+        axios.post(`http://localhost:8080/${param.formulaire.toLowerCase()}`, responses)
         .then((res) => console.log("Succes"))
         .catch((error) => console.log("Erreurs"))
 
