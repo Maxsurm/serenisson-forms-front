@@ -7,14 +7,15 @@ export const AdminPatientsShow = () => {
 
   const [patient, setPatient] = useState(null)
   const [error, setError] = useState(null)
-  const [formulaires, setFormulaires] = useState(null)
+  const [formulaires, setFormulaires] = useState([])
 
 
   const param = useParams()
 
   const API_URL = `http://localhost:8080/admin/patients/${param.id}`
 
-  const MAIL_URL = `http://localhost:8080/admin/patients/sendform/${param.formulaire}/${param.id}`
+  const ANA_URL = `http://localhost:8080/admin/patients/sendform/ANAMNESE/${param.id}`
+  const SIX_URL = `http://localhost:8080/admin/patients/sendform/SIXMOIS/${param.id}`
 
   const fetchPatient = async () => {
 
@@ -28,7 +29,7 @@ export const AdminPatientsShow = () => {
 
   const sendMail = async () => {
     try {
-      const { data } = await axios.get(MAIL_URL)
+      const { data } = await axios.get(ANA_URL)
       console.log(data);
       setFormulaires(data)
     } catch (error) {
