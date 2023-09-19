@@ -12,18 +12,22 @@ export const FrontClient = () => {
     const [n, setN] = useState(0)
     const [questions, setQuestions] = useState([{}])
     const [error, setError] = useState(null);
+    const [responses, setResponses] = useState([])
+
+    const [response, setResponse] = useState("")
+
 
     const param = useParams()
 
     // recuperation des questions 
-    const API_URL = `http://localhost:8080/admin/questions/form/${param.formulaire}`
+    const API_URL = `http://localhost:8080/admin/questions/form/${param.formulaire.toUpperCase()}`
 
     const fetchQuestions = async () => {
         try {
             const { data } = await axios.get(API_URL);
-            console.log("data", data)
+      
             setQuestions(data);  
-            console.log("questions", questions)
+            
         } catch (error) {
             setError(error.message);
         }
@@ -31,22 +35,43 @@ export const FrontClient = () => {
     };
 
 
+
+
     useEffect(() => {
         fetchQuestions();
-        console.log("questions dans UE", questions);
+       
     }, [n]);
 
     
 
     // recuperation des reponses
 
+    const updateResponses = (key,value) => {
+
+        setResponses([...responses,{questions:key, response:value}])
+        console.log(responses)
+  
+    }
 
     const prevQuestion = () => {
         setN( n - 1 )
+        setResponse(responses.get(questions[n]))
     }
     const nextQuestion = () => {
+       updateResponses(questions[n],response)
+       setResponse("")
         setN( n + 1 )
     } 
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(responses)
+        axios.post('http://localhost:8080/anamnese', responses)
+        .then((res) => console.log("Succes"))
+        .catch((error) => console.log("Erreurs"))
+
+
+    }
 
     return (
         <>
@@ -60,45 +85,45 @@ export const FrontClient = () => {
                     </div>
                     {questions[n].type === "TEXT" && (
                         <div className="p-5 flex justify-center">
-                            <input type="text" className='bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto' />
+                            <input type="text" className='bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto' onChange={(e) => setResponse(e.target.value)} value={response}/>
                         </div>
                     )}
                     
                     {questions[n].type === "BOOL" && (
                         <div className="p-5">
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto">Oui</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto">Non</div>
+                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" onClick={() => setResponse("Oui")}>Oui</div>
+                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Non")}>Non</div>
                         </div>
                     )}
                     {questions[n].type === "R1" && (
                         <div className="p-5">
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto">Très satisfaisant</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto">Satisfaisant</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto">Peu satisfaisant</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto">Pas satisfait</div>
+                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Très satisfaisant")}>Très satisfaisant</div>
+                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Satisfaisant")}>Satisfaisant</div>
+                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Peu satisfaisant")}>Peu satisfaisant</div>
+                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Pas satisfait")}>Pas satisfait</div>
                         </div>
                     )}
                     {questions[n].type === "R2" && (
                         <div className="p-5">
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto">Jamais</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto">Occasionnelles</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto">Assez fréquentes</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto">Toujours</div>
+                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Jamais")}>Jamais</div>
+                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Occasionnelles")}>Occasionnelles</div>
+                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Assez fréquentes")}>Assez fréquentes</div>
+                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Toujours")}>Toujours</div>
                         </div>
                     )}
                     {questions[n].type === "NUMBER" && (
                         <div className="p-5 flex justify-center">
-                            <input type="number" className='bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto' />
+                            <input type="number" className='bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto' onChange={(e) => setResponse(e.target.value)} value={response}/>
                         </div>
                     )}
                     {questions[n].type === "TEXTAREA" && (
                         <div className="p-5 flex justify-center">
-                            <textarea type="text" className='bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto' />
+                            <textarea type="text" className='bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto' onChange={(e) => setResponse(e.target.value)} value={response}/>
                         </div>
                     )}
                     <div className='flex justify-around pb-8'>
                         {questions[n].rankOrder > 1 && <button onClick={prevQuestion} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Précédent</button>}
-                        {questions[n].rankOrder === questions.length -1 ? <button className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Envoyer le formulaire</button> : <button onClick={nextQuestion} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Suivant</button>}
+                        {questions[n].rankOrder === questions.length -1 ? <button className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2' onClick={(e) =>handleSubmit(e)}>Envoyer le formulaire</button> : <button onClick={nextQuestion} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Suivant</button>}
                     </div>
                 </div>
             </main>

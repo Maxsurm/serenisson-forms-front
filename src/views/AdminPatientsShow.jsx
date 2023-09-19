@@ -7,11 +7,14 @@ export const AdminPatientsShow = () => {
 
   const [patient, setPatient] = useState(null)
   const [error, setError] = useState(null)
+  const [formulaires, setFormulaires] = useState(null)
 
 
   const param = useParams()
 
   const API_URL = `http://localhost:8080/admin/patients/${param.id}`
+
+  const MAIL_URL = `http://localhost:8080/admin/patients/sendform/${param.formulaire}/${param.id}`
 
   const fetchPatient = async () => {
 
@@ -19,6 +22,16 @@ export const AdminPatientsShow = () => {
       const { data } = await axios.get(API_URL)
       console.log(data);
       setPatient(data)
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+  const sendMail = async () => {
+    try {
+      const { data } = await axios.get(MAIL_URL)
+      console.log(data);
+      setFormulaires(data)
     } catch (error) {
       setError(error.message)
     }
@@ -58,6 +71,10 @@ export const AdminPatientsShow = () => {
                 </div>
                 <h3 className="text-2xl font-bold my-5">Formulaires du patient</h3>
                 {/* LES FORMULAIRES  */}
+                <div className='flex justify-around pb-8'>
+                <button  onClick={sendMail} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Envoyer Anamnèse</button>
+                <button   className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Envoyer Formulaire Six mois</button>
+                </div>
               </div>
             </div>
           </div>
