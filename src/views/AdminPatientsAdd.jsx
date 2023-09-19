@@ -67,7 +67,7 @@ export const AdminPatientsAdd = () => {
 
             {message == "error" && (
                 <p className="bg-red-200 p-4 text-black text-center font-bold text-3xl mb-10 rounded-xl border-2 border-red-500">
-                    Les champs nom, prénom et email sont obligatoires !
+                    Les champs nom, prénom sont obligatoires et l'email doit etre unique !
                 </p>
             )}
 
@@ -124,7 +124,7 @@ export const AdminPatientsAdd = () => {
                             placeholder="Tapez l'Email du patient ici "
                         />
                         {errors.email?.type === "required" && (
-                            <p className="text-red-500">L'email est obligatoire</p>
+                            <p className="text-red-500">L'email est obligatoire et doit etre unique</p>
                         )}
                     </div>
                     <div className="flex justify-center">

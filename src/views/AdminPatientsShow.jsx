@@ -27,7 +27,7 @@ export const AdminPatientsShow = () => {
     }
   }
 
-  const sendMail = async () => {
+  const sendAna = async () => {
     try {
       const { data } = await axios.get(ANA_URL)
       console.log(data);
@@ -72,7 +72,7 @@ export const AdminPatientsShow = () => {
                 <h3 className="text-2xl font-bold my-5">Formulaires du patient</h3>
                 {/* LES FORMULAIRES  */}
                 <div className='flex justify-around pb-8'>
-                  {patient.anamnese === null ? <button  onClick={sendMail} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Envoyer Anamnèse</button> : <button className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Télécharger Anamnèse</button>}
+                  {patient.anapath === null ? <button  onClick={sendAna} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Envoyer Anamnèse</button> : <button className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Télécharger Anamnèse</button>}
                 
                 <button   className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Envoyer Formulaire Six mois</button>
                 </div>

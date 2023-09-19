@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 
 export const FrontClient = () => {
@@ -13,8 +13,9 @@ export const FrontClient = () => {
     const [questions, setQuestions] = useState([{}])
     const [error, setError] = useState(null);
     const [responses, setResponses] = useState([])
-
     const [response, setResponse] = useState("")
+    const [queryParameters] = useSearchParams()
+
 
 
     const param = useParams()
@@ -66,9 +67,11 @@ export const FrontClient = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(responses)
-        axios.post(`http://localhost:8080/${param.formulaire.toLowerCase()}`, responses)
+        axios.post(`http://localhost:8080/form/${param.formulaire.toUpperCase()}/${queryParameters.get("token")}`, responses)
         .then((res) => console.log("Succes"))
         .catch((error) => console.log("Erreurs"))
+
+        
 
 
     }
@@ -91,24 +94,24 @@ export const FrontClient = () => {
                     
                     {questions[n].type === "BOOL" && (
                         <div className="p-5">
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" onClick={() => setResponse("Oui")}>Oui</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Non")}>Non</div>
+                            <div className={response !== "Oui" ? "bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" : "bg-green-800 text-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" } onClick={() => {setResponse("Oui")}}>Oui</div>
+                            <div className={response !== "Non" ? "bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" : "bg-green-800 text-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" } onClick={() => setResponse("Non")}>Non</div>
                         </div>
                     )}
                     {questions[n].type === "R1" && (
                         <div className="p-5">
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Très satisfaisant")}>Très satisfaisant</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Satisfaisant")}>Satisfaisant</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Peu satisfaisant")}>Peu satisfaisant</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Pas satisfait")}>Pas satisfait</div>
+                            <div className={response !== "Très satisfaisant" ? "bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" : "bg-green-800 text-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" } onClick={() => setResponse("Très satisfaisant")}>Très satisfaisant</div>
+                            <div className={response !== "Satisfaisant" ? "bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" : "bg-green-800 text-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" } onClick={() => setResponse("Satisfaisant")}>Satisfaisant</div>
+                            <div className={response !== "Peu satisfaisant" ? "bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" : "bg-green-800 text-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" } onClick={() => setResponse("Peu satisfaisant")}>Peu satisfaisant</div>
+                            <div className={response !== "Pas satisfait" ? "bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" : "bg-green-800 text-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" } onClick={() => setResponse("Pas satisfait")}>Pas satisfait</div>
                         </div>
                     )}
                     {questions[n].type === "R2" && (
                         <div className="p-5">
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Jamais")}>Jamais</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Occasionnelles")}>Occasionnelles</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Assez fréquentes")}>Assez fréquentes</div>
-                            <div className="bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto"onClick={() => setResponse("Toujours")}>Toujours</div>
+                            <div className={response !== "Jamais" ? "bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" : "bg-green-800 text-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" } onClick={() => setResponse("Jamais")}>Jamais</div>
+                            <div className={response !== "Occasionnelles" ? "bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" : "bg-green-800 text-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" } onClick={() => setResponse("Occasionnelles")}>Occasionnelles</div>
+                            <div className={response !== "Assez fréquentes" ? "bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" : "bg-green-800 text-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" } onClick={() => setResponse("Assez fréquentes")}>Assez fréquentes</div>
+                            <div className={response !== "Toujours" ? "bg-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" : "bg-green-800 text-white m-2 text-center font-semibold rounded-xl p-2 w-2/3 mx-auto" } onClick={() => setResponse("Toujours")}>Toujours</div>
                         </div>
                     )}
                     {questions[n].type === "NUMBER" && (
@@ -123,7 +126,8 @@ export const FrontClient = () => {
                     )}
                     <div className='flex justify-around pb-8'>
                         {questions[n].rankOrder > 1 && <button onClick={prevQuestion} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Précédent</button>}
-                        {questions[n].rankOrder === questions.length -1 ? <button className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2' onClick={(e) =>handleSubmit(e)}>Envoyer le formulaire</button> : <button onClick={nextQuestion} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Suivant</button>}
+
+                        {questions[n].rankOrder === questions.length -1 ? <button disabled={response === ""} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2 disabled:bg-[#22452d] disabled:text-gray-300' onClick={(e) =>handleSubmit(e)}>Envoyer le formulaire</button> : <button disabled={response === ""} onClick={nextQuestion} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2 disabled:bg-[#22452d] disabled:text-gray-300'>Suivant</button>}
                     </div>
                 </div>
             </main>
