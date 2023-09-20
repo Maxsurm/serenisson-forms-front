@@ -13,8 +13,8 @@ export const AdminPatientsShow = () => {
   const param = useParams()
 
   const API_URL = `http://localhost:8080/admin/patients/${param.id}`
-  const FORM_URL = `http://localhost:8080/admin/patients/sendform/ANAMNESE/${param.id}`
-  const GET_FORM_URL = `http://localhost:8080/admin/patients/getform/ANAMNESE/${param.id}`
+  const FORM_URL = `http://localhost:8080/admin/patients/sendform`
+  const GET_FORM_URL = `http://localhost:8080/admin/patients/getform`
 
   const fetchPatient = async () => {
     try {
@@ -29,19 +29,21 @@ export const AdminPatientsShow = () => {
     fetchPatient()
   }, [])
 
-  const sendForm = async () => {
+  const sendForm = async (formName) => {
     try {
-      const { data } = await axios.get(FORM_URL)
-      console.log(data);
+      const url = `${FORM_URL}/${formName}/${param.id}`
+      const { data } = await axios.get(url)
+      
       setFormulaires(data)
     } catch (error) {
       setError(error.message)
     }
   }
 
-  const getForm = async () => {
+  const getForm = async (formName) => {
     try {
-      const response = await axios.get(GET_FORM_URL, {
+      const geturl = `${GET_FORM_URL}/${formName}/${param.id}`
+      const response = await axios.get(geturl, {
         responseType: 'blob', // Spécifie que la réponse est un blob (fichier)
       });
       // Créez un objet URL à partir du blob pour créer un lien de téléchargement
@@ -49,8 +51,9 @@ export const AdminPatientsShow = () => {
       const url = window.URL.createObjectURL(blob);
       // Créez un lien pour déclencher le téléchargement
       const link = document.createElement('a');
+      
       link.href = url;
-      link.setAttribute('download', 'formulaire.pdf');
+      link.setAttribute('download', response.headers["x-suggested-filename"]);
       // Simulez un clic sur le lien pour déclencher le téléchargement
       link.click();
       // Libérez l'URL de l'objet blob
@@ -97,8 +100,8 @@ export const AdminPatientsShow = () => {
                 <h3 className="text-2xl font-bold my-5">Formulaires du patient</h3>
                 {/* LES FORMULAIRES  */}
                 <div className='flex justify-around pb-8'>
-                  {patient.anapath === null ? <button  onClick={sendForm} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Envoyer Anamnèse</button> : <button onClick={getForm} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Télécharger Anamnèse</button>}
-                  {/* {patient.sixpath === null ? <button  onClick={()=>{setFormName("SIXMOIS");sendForm}} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Envoyer Formulaire Six mois</button> : <button onClick={()=>{setFormName("SIXMOIS");getForm}} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Télécharger Formulaire six mois</button>} */}
+                  {patient.anapath === null ? <button  onClick={()=>{sendForm("ANAMNESE")}} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Envoyer Anamnèse</button> : <button onClick={()=>{getForm("ANAMNESE")}} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Télécharger Anamnèse</button>}
+                  {patient.sixpath === null ? <button  onClick={()=>{sendForm("SIXMOIS")}} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Envoyer Formulaire Six mois</button> : <button onClick={()=>{getForm("SIXMOIS")}} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Télécharger Formulaire six mois</button>}
                 </div>
               </div>
             </div>
