@@ -84,7 +84,7 @@ export const FrontClient = () => {
             <main className='flex justify-center my-20'>
                 <div className="bg-[#DBFFD6] rounded-2xl sm:w-5/6 sm:mx-5 lg:w-1/2 shadow-lg shadow-slate-500">
                     <div className="bg-[#50A34E] rounded-t-2xl text-white font-bold px-5 py-2">
-                        <h1 className='text-center'>{questions[n].question}</h1>
+                        <h1 className='text-center'>Question {n+1}/{questions.length} : {questions[n].question}</h1>
                     </div>
                     {questions[n].type === "TEXT" && (
                         <div className="p-5 flex justify-center">
