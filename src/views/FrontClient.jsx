@@ -22,27 +22,18 @@ export const FrontClient = () => {
 
     // recuperation des questions 
     const API_URL = `http://localhost:8080/admin/questions/form/${param.formulaire.toUpperCase()}`
-
     const fetchQuestions = async () => {
         try {
             const { data } = await axios.get(API_URL);
             setQuestions(data);
-
         } catch (error) {
             setError(error.message);
         }
-
     };
-
-
-
 
     useEffect(() => {
         fetchQuestions();
-
     }, [n]);
-
-
 
     // recuperation des reponses
 
@@ -126,7 +117,7 @@ export const FrontClient = () => {
                     <div className='flex justify-around pb-8'>
                         {questions[n].rankOrder > 1 && <button onClick={prevQuestion} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2'>Précédent</button>}
 
-                        {questions[n].rankOrder === questions.length - 1 ? <button disabled={response === ""} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2 disabled:bg-[#22452d] disabled:text-gray-300' onClick={(e) => handleSubmit(e)}>Envoyer le formulaire</button> : <button disabled={response === ""} onClick={nextQuestion} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2 disabled:bg-[#22452d] disabled:text-gray-300'>Suivant</button>}
+                        {questions[n].rankOrder === questions.length ? <button disabled={response === ""} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2 disabled:bg-[#22452d] disabled:text-gray-300' onClick={(e) => handleSubmit(e)}>Envoyer le formulaire</button> : <button disabled={response === ""} onClick={nextQuestion} className='bg-[#317845] w-1/3 text-white font-bold rounded-xl p-2 disabled:bg-[#22452d] disabled:text-gray-300'>Suivant</button>}
                     </div>
                 </div>
             </main>
